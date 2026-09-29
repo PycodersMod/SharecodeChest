@@ -204,3 +204,9 @@ Mod ID、Registry Namespace 和存档标识保持原值。工程目录、Gradle 
 - 不继承 `RandomizableContainerBlockEntity` 的模组容器不会被转换。
 - 仅 `minecraft:chests/*` 战利品表预置了显示名称翻译，其他战利品表自动回退为可读名称。
 - GUI 中显示的编号是实例 UUID 的简短前缀，非自增序号。
+
+## License
+
+本项目采用 MIT License，详见 [LICENSE](./LICENSE)。
+
+本仓库的 Gradle Wrapper 保留其随附的 Apache-2.0 许可，详见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
