@@ -1,15 +1,24 @@
+import java.nio.charset.StandardCharsets
+import java.util.Base64
+
 plugins {
     id("net.minecraftforge.gradle") version "6.0.24"
     id("eclipse")
     id("maven-publish")
 }
 
-group = "com.sharecodechestbypycoder"
+group = "com.pycoder.sharecodechest"
 version = "1.0.0"
 
 base {
     archivesName.set("sharecodechestbypycoder")
 }
+
+val pycodersRunDir = file(providers.gradleProperty("pycodersRuntimeDir").orElse("../../runtime/legacy-import/SharecodeChest/run").get())
+fun decodeArgs(name: String): List<String> = providers.gradleProperty(name).orNull?.takeIf { it.isNotEmpty() }?.split('.')?.map { if (it == "_") "" else String(Base64.getDecoder().decode(it), StandardCharsets.UTF_8) } ?: emptyList()
+val pycodersGameArgs = decodeArgs("pycodersGameArgsB64")
+val pycodersJavaArgs = decodeArgs("pycodersJavaArgsB64")
+val pycodersUsername = providers.gradleProperty("pycodersUsername").orElse("Dev").get()
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -21,7 +30,10 @@ minecraft {
 
     runs {
         create("client") {
-            workingDirectory(project.file("run"))
+            workingDirectory(pycodersRunDir)
+            args("--username", pycodersUsername)
+            pycodersGameArgs.forEach { args(it) }
+            pycodersJavaArgs.forEach { jvmArg(it) }
             property("forge.logging.markers", "REGISTRIES")
             property("forge.logging.console.level", "debug")
             mods {
@@ -32,7 +44,9 @@ minecraft {
         }
 
         create("server") {
-            workingDirectory(project.file("run-server"))
+            workingDirectory(pycodersRunDir)
+            pycodersGameArgs.forEach { args(it) }
+            pycodersJavaArgs.forEach { jvmArg(it) }
             property("forge.logging.markers", "REGISTRIES")
             property("forge.logging.console.level", "debug")
             args("--nogui")
@@ -44,7 +58,7 @@ minecraft {
         }
 
         create("data") {
-            workingDirectory(project.file("run-data"))
+            workingDirectory(pycodersRunDir)
             property("forge.logging.markers", "REGISTRIES")
             property("forge.logging.console.level", "debug")
             args("--mod", "sharecodechestbypycoder", "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources/"))
