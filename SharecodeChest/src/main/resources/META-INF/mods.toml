@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+issueTrackerURL=""
+
+[[mods]]
+modId="sharecodechestbypycoder"
+version="1.0.0"
+displayName="SharecodeChestByPycoder"
+authors="Pycoder"
+description='''
+SharecodeChestByPycoder replaces loot containers with recordable special containers for remote, per-player loot opening and sharing.
+'''
+
+[[dependencies.sharecodechestbypycoder]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.sharecodechestbypycoder]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
+
