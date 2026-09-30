@@ -7,6 +7,7 @@ issueTrackerURL=""
 modId="sharecodechestbypycoder"
 version="1.0.0"
 displayName="SharecodeChestByPycoder"
+logoFile="logo.png"
 authors="Pycoder"
 description='''
 SharecodeChestByPycoder replaces loot containers with recordable special containers for remote, per-player loot opening and sharing.
