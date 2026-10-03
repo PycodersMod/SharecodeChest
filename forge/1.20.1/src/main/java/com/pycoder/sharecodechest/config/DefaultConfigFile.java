@@ -18,83 +18,83 @@ public final class DefaultConfigFile {
             Files.createDirectories(configPath.getParent());
             Files.writeString(configPath, DEFAULT_CONTENT, StandardCharsets.UTF_8);
         } catch (IOException exception) {
-            SharecodeChestByPycoder.LOGGER.error("Failed to create default SharecodeChestByPycoder config", exception);
+            SharecodeChestByPycoder.LOGGER.error("创建 SharecodeChestByPycoder 默认配置失败", exception);
         }
     }
 
     private static final String DEFAULT_CONTENT = """
             [conversion]
-            # Master switch for replacing loot-table containers with SharecodeChest containers during chunk load.
+            # 是否在区块加载时将带战利品表的容器替换为 SharecodeChest 容器。
             convertLootContainers = true
-            # If true, old chunks loaded after the mod is installed are scanned and converted once.
+            # 为 true 时，模组安装后首次加载旧区块会扫描并转换其中的容器。
             convertAlreadyGeneratedChunks = true
-            # If true, vanilla chest block entities with loot tables are converted to SharecodeChest loot chests.
+            # 为 true 时，带战利品表的原版箱子方块实体会转换为 SharecodeChest 战利品箱。
             convertChests = true
-            # If true, vanilla barrel block entities with loot tables are converted to SharecodeChest loot barrels.
+            # 为 true 时，带战利品表的原版木桶方块实体会转换为 SharecodeChest 战利品木桶。
             convertBarrels = true
-            # If true, vanilla trapped chest block entities with loot tables are converted to SharecodeChest trapped loot chests.
+            # 为 true 时，带战利品表的原版陷阱箱方块实体会转换为 SharecodeChest 陷阱战利品箱。
             convertTrappedChests = true
-            # If true, non-vanilla RandomizableContainerBlockEntity blocks with loot tables are converted to the generic SharecodeChest loot chest.
+            # 为 true 时，带战利品表的非原版 RandomizableContainerBlockEntity 会转换为通用的 SharecodeChest 战利品箱。
             convertOtherRandomizableContainers = true
-            # If true, loot-table minecart containers are recorded on right click instead of opening the vanilla container.
+            # 为 true 时，右键带战利品表的矿车容器会记录容器，而不会打开原版容器。
             recordLootMinecarts = true
 
             [sharing]
-            # Master switch for the share button and server-side share action.
+            # 是否启用分享按钮和服务端分享操作。
             enableSharing = true
-            # If true, players who have joined before can be selected as share targets even while offline.
+            # 为 true 时，曾加入过服务器的玩家即使当前离线，也可被选为分享对象。
             allowOfflineShareTargets = true
-            # If true, sharing a chest already present in the target inbox does nothing instead of adding a duplicate inbox row.
+            # 为 true 时，如果目标收件箱已有该箱子，则忽略重复分享，不再添加重复条目。
             silentlySkipDuplicateInboxEntries = true
-            # If true, accepting an inbox entry for a chest already in the player's chest list removes that inbox entry.
+            # 为 true 时，若玩家接受的箱子已在自己的箱子列表中，则移除对应收件箱条目。
             removeInboxEntryWhenAlreadyRecorded = true
 
             [loot]
-            # If true, loot is generated only when the player presses Open in the GUI, not when recording or accepting a share.
+            # 为 true 时，仅在玩家于图形界面按下“打开”时生成战利品；记录或接受分享时不会生成。
             generateLootOnGuiOpen = true
-            # If true, generated loot is inserted directly into the player's inventory.
+            # 为 true 时，生成的战利品会直接放入玩家物品栏。
             insertLootDirectlyToInventory = true
-            # If true, items that do not fit in the inventory are dropped at the player's feet.
+            # 为 true 时，物品栏放不下的物品会掉落在玩家脚边。
             dropOverflowItemsAtPlayerFeet = true
-            # If true, each player can roll the same recorded chest instance once independently, similar to Lootr.
+            # 为 true 时，每名玩家都可独立开启同一已记录箱子一次，机制类似 Lootr。
             eachPlayerRollsIndependently = true
 
             [gui]
-            # Number of chest or inbox rows shown at once on the main screen.
+            # 主界面同时显示的箱子或收件箱条目行数。
             mainScreenVisibleRows = 7
-            # Number of player rows shown at once on the share screen.
+            # 分享界面同时显示的玩家行数。
             shareScreenVisibleRows = 8
-            # If true, the share screen displays a name search box above the player list.
+            # 为 true 时，分享界面会在玩家列表上方显示名称搜索框。
             enableShareSearchBox = true
-            # If true, the share screen appends online/offline status text after each player name.
+            # 为 true 时，分享界面会在每名玩家名称后显示在线/离线状态。
             showOnlineStatusInShareScreen = true
-            # If true, pressing ESC on the share screen returns to the main chest screen instead of closing the GUI.
+            # 为 true 时，在分享界面按 ESC 会返回箱子主界面，而不是关闭界面。
             escReturnsFromShareScreen = true
 
             [messages]
-            # Translation key shown in the action bar when a container is recorded for the first time.
+            # 首次记录容器时在快捷栏上方显示的翻译键。
             recorded = "message.sharecodechestbypycoder.recorded"
-            # Translation key shown when the player right-clicks a world container that was already accepted from a share.
+            # 玩家右键已通过分享接受的世界容器时显示的翻译键。
             acceptedShareBefore = "message.sharecodechestbypycoder.accepted_share_before"
-            # Translation key shown when the player tries to record or open a chest instance that is already opened.
+            # 玩家尝试记录或打开已经开启的箱子实例时显示的翻译键。
             alreadyOpened = "message.sharecodechestbypycoder.already_opened"
-            # Translation key shown when the player right-clicks a container that is already recorded but not opened.
+            # 玩家右键已记录但尚未开启的容器时显示的翻译键。
             alreadyRecorded = "message.sharecodechestbypycoder.already_recorded"
-            # Translation key shown when a special container has no bound loot table, such as a creative-placed block.
+            # 特殊容器没有绑定战利品表时显示的翻译键，例如创造模式放置的方块。
             noLootTable = "message.sharecodechestbypycoder.no_loot_table"
-            # Translation key shown after the server successfully generates and grants loot.
+            # 服务端成功生成并发放战利品后显示的翻译键。
             opened = "message.sharecodechestbypycoder.opened"
-            # Translation key shown to the sender after the share action completes.
+            # 分享操作完成后向发送者显示的翻译键。
             shareDone = "message.sharecodechestbypycoder.share_done"
-            # Translation key shown to an online target player when a new share is received.
+            # 在线目标玩家收到新分享时显示的翻译键。
             shareReceived = "message.sharecodechestbypycoder.share_received"
-            # Translation key shown when accepting a shared chest that is already in the player's chest list.
+            # 接受的分享箱子已在玩家箱子列表中时显示的翻译键。
             alreadyHaveOnAccept = "message.sharecodechestbypycoder.already_have_on_accept"
-            # Translation key shown after accepting a shared chest into the player's unopened chest list.
+            # 玩家接受分享箱子并将其加入未开启列表后显示的翻译键。
             shareAccepted = "message.sharecodechestbypycoder.share_accepted"
-            # Translation key shown after rejecting a shared chest from the inbox.
+            # 玩家从收件箱拒绝分享箱子后显示的翻译键。
             shareRejected = "message.sharecodechestbypycoder.share_rejected"
-            # Translation key shown when a share action is attempted while sharing is disabled by config.
+            # 配置禁用分享时仍尝试执行分享操作所显示的翻译键。
             sharingDisabled = "message.sharecodechestbypycoder.sharing_disabled"
             """;
 
